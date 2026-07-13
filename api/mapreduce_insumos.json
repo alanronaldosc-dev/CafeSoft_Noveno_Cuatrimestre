@@ -1,463 +1,463 @@
 [
     {
+        "insumo": "Pan de caja",
+        "total_consumido": 216.0,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Sandwich de Pierna",
+                "cantidad_vendida": 108.0,
+                "consumo_estimado": 216.0
+            }
+        ]
+    },
+    {
         "insumo": "Huevos",
-        "total_consumido": 64.0,
+        "total_consumido": 160.0,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Pastel de Zanahoria",
-                "cantidad_vendida": 32.0,
-                "consumo_estimado": 64.0
+                "cantidad_vendida": 80.0,
+                "consumo_estimado": 160.0
             }
         ]
     },
     {
         "insumo": "Leche",
-        "total_consumido": 52.58,
+        "total_consumido": 149.31,
         "ranking_productos": [
             {
                 "posicion": 1,
-                "producto": "Chocolate Caliente Especial",
-                "cantidad_vendida": 87.0,
-                "consumo_estimado": 26.1
+                "producto": "Té Chai Latte",
+                "cantidad_vendida": 197.0,
+                "consumo_estimado": 59.1
             },
             {
                 "posicion": 2,
-                "producto": "Té Chai Latte",
-                "cantidad_vendida": 61.0,
-                "consumo_estimado": 18.3
+                "producto": "Chocolate Caliente Especial",
+                "cantidad_vendida": 135.0,
+                "consumo_estimado": 40.5
             },
             {
                 "posicion": 3,
                 "producto": "Frappé de Cookies",
-                "cantidad_vendida": 20.0,
-                "consumo_estimado": 5.0
+                "cantidad_vendida": 75.0,
+                "consumo_estimado": 18.75
             },
             {
                 "posicion": 4,
-                "producto": "Cappuccino Clásico",
-                "cantidad_vendida": 11.0,
-                "consumo_estimado": 1.98
+                "producto": "Latte Vainilla",
+                "cantidad_vendida": 54.0,
+                "consumo_estimado": 16.2
             },
             {
                 "posicion": 5,
-                "producto": "Latte Vainilla",
-                "cantidad_vendida": 4.0,
-                "consumo_estimado": 1.2
-            }
-        ]
-    },
-    {
-        "insumo": "Pan de caja",
-        "total_consumido": 26.0,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Sandwich de Pierna",
-                "cantidad_vendida": 13.0,
-                "consumo_estimado": 26.0
+                "producto": "Cappuccino Clásico",
+                "cantidad_vendida": 82.0,
+                "consumo_estimado": 14.76
             }
         ]
     },
     {
         "insumo": "Pan para panini",
-        "total_consumido": 25.0,
+        "total_consumido": 98.0,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Panini de Pavo y Queso",
-                "cantidad_vendida": 25.0,
-                "consumo_estimado": 25.0
+                "cantidad_vendida": 98.0,
+                "consumo_estimado": 98.0
             }
         ]
     },
     {
         "insumo": "Hielo frappé",
-        "total_consumido": 4.0,
+        "total_consumido": 15.0,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Frappé de Cookies",
-                "cantidad_vendida": 20.0,
-                "consumo_estimado": 4.0
+                "cantidad_vendida": 75.0,
+                "consumo_estimado": 15.0
             }
         ]
     },
     {
         "insumo": "Hielo",
-        "total_consumido": 3.6,
+        "total_consumido": 10.05,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Americano con Hielo",
-                "cantidad_vendida": 24.0,
-                "consumo_estimado": 3.6
-            }
-        ]
-    },
-    {
-        "insumo": "Chocolate en polvo",
-        "total_consumido": 2.17,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Chocolate Caliente Especial",
-                "cantidad_vendida": 87.0,
-                "consumo_estimado": 2.17
-            }
-        ]
-    },
-    {
-        "insumo": "Crema batida",
-        "total_consumido": 2.14,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Chocolate Caliente Especial",
-                "cantidad_vendida": 87.0,
-                "consumo_estimado": 1.74
-            },
-            {
-                "posicion": 2,
-                "producto": "Frappé de Cookies",
-                "cantidad_vendida": 20.0,
-                "consumo_estimado": 0.4
-            }
-        ]
-    },
-    {
-        "insumo": "Pechuga de pavo",
-        "total_consumido": 2.0,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Panini de Pavo y Queso",
-                "cantidad_vendida": 25.0,
-                "consumo_estimado": 2.0
-            }
-        ]
-    },
-    {
-        "insumo": "Café espresso",
-        "total_consumido": 1.49,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Americano con Hielo",
-                "cantidad_vendida": 24.0,
-                "consumo_estimado": 0.43
-            },
-            {
-                "posicion": 2,
-                "producto": "Café Americano",
-                "cantidad_vendida": 24.0,
-                "consumo_estimado": 0.43
-            },
-            {
-                "posicion": 3,
-                "producto": "Frappé de Cookies",
-                "cantidad_vendida": 20.0,
-                "consumo_estimado": 0.36
-            },
-            {
-                "posicion": 4,
-                "producto": "Cappuccino Clásico",
-                "cantidad_vendida": 11.0,
-                "consumo_estimado": 0.2
-            },
-            {
-                "posicion": 5,
-                "producto": "Latte Vainilla",
-                "cantidad_vendida": 4.0,
-                "consumo_estimado": 0.07
-            }
-        ]
-    },
-    {
-        "insumo": "Zanahoria",
-        "total_consumido": 1.28,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Pastel de Zanahoria",
-                "cantidad_vendida": 32.0,
-                "consumo_estimado": 1.28
+                "cantidad_vendida": 67.0,
+                "consumo_estimado": 10.05
             }
         ]
     },
     {
         "insumo": "Pierna de cerdo",
-        "total_consumido": 1.04,
+        "total_consumido": 8.64,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Sandwich de Pierna",
-                "cantidad_vendida": 13.0,
-                "consumo_estimado": 1.04
+                "cantidad_vendida": 108.0,
+                "consumo_estimado": 8.64
+            }
+        ]
+    },
+    {
+        "insumo": "Pechuga de pavo",
+        "total_consumido": 7.84,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Panini de Pavo y Queso",
+                "cantidad_vendida": 98.0,
+                "consumo_estimado": 7.84
+            }
+        ]
+    },
+    {
+        "insumo": "Café espresso",
+        "total_consumido": 7.06,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Café Americano",
+                "cantidad_vendida": 114.0,
+                "consumo_estimado": 2.05
+            },
+            {
+                "posicion": 2,
+                "producto": "Cappuccino Clásico",
+                "cantidad_vendida": 82.0,
+                "consumo_estimado": 1.48
+            },
+            {
+                "posicion": 3,
+                "producto": "Frappé de Cookies",
+                "cantidad_vendida": 75.0,
+                "consumo_estimado": 1.35
+            },
+            {
+                "posicion": 4,
+                "producto": "Americano con Hielo",
+                "cantidad_vendida": 67.0,
+                "consumo_estimado": 1.21
+            },
+            {
+                "posicion": 5,
+                "producto": "Latte Vainilla",
+                "cantidad_vendida": 54.0,
+                "consumo_estimado": 0.97
+            }
+        ]
+    },
+    {
+        "insumo": "Crema batida",
+        "total_consumido": 4.2,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Chocolate Caliente Especial",
+                "cantidad_vendida": 135.0,
+                "consumo_estimado": 2.7
+            },
+            {
+                "posicion": 2,
+                "producto": "Frappé de Cookies",
+                "cantidad_vendida": 75.0,
+                "consumo_estimado": 1.5
             }
         ]
     },
     {
         "insumo": "Queso manchego",
-        "total_consumido": 1.0,
+        "total_consumido": 3.92,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Panini de Pavo y Queso",
-                "cantidad_vendida": 25.0,
-                "consumo_estimado": 1.0
+                "cantidad_vendida": 98.0,
+                "consumo_estimado": 3.92
+            }
+        ]
+    },
+    {
+        "insumo": "Chocolate en polvo",
+        "total_consumido": 3.37,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Chocolate Caliente Especial",
+                "cantidad_vendida": 135.0,
+                "consumo_estimado": 3.37
+            }
+        ]
+    },
+    {
+        "insumo": "Zanahoria",
+        "total_consumido": 3.2,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Pastel de Zanahoria",
+                "cantidad_vendida": 80.0,
+                "consumo_estimado": 3.2
             }
         ]
     },
     {
         "insumo": "Harina de trigo",
-        "total_consumido": 0.96,
+        "total_consumido": 2.4,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Pastel de Zanahoria",
-                "cantidad_vendida": 32.0,
-                "consumo_estimado": 0.96
-            }
-        ]
-    },
-    {
-        "insumo": "Malvaviscos",
-        "total_consumido": 0.87,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Chocolate Caliente Especial",
-                "cantidad_vendida": 87.0,
-                "consumo_estimado": 0.87
-            }
-        ]
-    },
-    {
-        "insumo": "Té chai",
-        "total_consumido": 0.61,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Té Chai Latte",
-                "cantidad_vendida": 61.0,
-                "consumo_estimado": 0.61
-            }
-        ]
-    },
-    {
-        "insumo": "Azúcar",
-        "total_consumido": 0.61,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Té Chai Latte",
-                "cantidad_vendida": 61.0,
-                "consumo_estimado": 0.61
+                "cantidad_vendida": 80.0,
+                "consumo_estimado": 2.4
             }
         ]
     },
     {
         "insumo": "Galletas tipo chocolate",
-        "total_consumido": 0.6,
+        "total_consumido": 2.25,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Frappé de Cookies",
-                "cantidad_vendida": 20.0,
-                "consumo_estimado": 0.6
-            }
-        ]
-    },
-    {
-        "insumo": "Crema para frappé",
-        "total_consumido": 0.5,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Frappé de Cookies",
-                "cantidad_vendida": 20.0,
-                "consumo_estimado": 0.5
-            }
-        ]
-    },
-    {
-        "insumo": "Queso crema",
-        "total_consumido": 0.48,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Pastel de Zanahoria",
-                "cantidad_vendida": 32.0,
-                "consumo_estimado": 0.48
-            }
-        ]
-    },
-    {
-        "insumo": "Aceite vegetal",
-        "total_consumido": 0.32,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Pastel de Zanahoria",
-                "cantidad_vendida": 32.0,
-                "consumo_estimado": 0.32
-            }
-        ]
-    },
-    {
-        "insumo": "Nuez",
-        "total_consumido": 0.32,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Pastel de Zanahoria",
-                "cantidad_vendida": 32.0,
-                "consumo_estimado": 0.32
-            }
-        ]
-    },
-    {
-        "insumo": "Cardamomo",
-        "total_consumido": 0.31,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Té Chai Latte",
-                "cantidad_vendida": 61.0,
-                "consumo_estimado": 0.31
+                "cantidad_vendida": 75.0,
+                "consumo_estimado": 2.25
             }
         ]
     },
     {
         "insumo": "Jitomate",
-        "total_consumido": 0.26,
+        "total_consumido": 2.16,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Sandwich de Pierna",
-                "cantidad_vendida": 13.0,
-                "consumo_estimado": 0.26
+                "cantidad_vendida": 108.0,
+                "consumo_estimado": 2.16
             }
         ]
     },
     {
-        "insumo": "Mantequilla",
-        "total_consumido": 0.25,
+        "insumo": "Té chai",
+        "total_consumido": 1.97,
         "ranking_productos": [
             {
                 "posicion": 1,
-                "producto": "Panini de Pavo y Queso",
-                "cantidad_vendida": 25.0,
-                "consumo_estimado": 0.25
+                "producto": "Té Chai Latte",
+                "cantidad_vendida": 197.0,
+                "consumo_estimado": 1.97
+            }
+        ]
+    },
+    {
+        "insumo": "Azúcar",
+        "total_consumido": 1.97,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Té Chai Latte",
+                "cantidad_vendida": 197.0,
+                "consumo_estimado": 1.97
+            }
+        ]
+    },
+    {
+        "insumo": "Crema para frappé",
+        "total_consumido": 1.88,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Frappé de Cookies",
+                "cantidad_vendida": 75.0,
+                "consumo_estimado": 1.88
             }
         ]
     },
     {
         "insumo": "Mayonesa",
-        "total_consumido": 0.2,
+        "total_consumido": 1.62,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Sandwich de Pierna",
-                "cantidad_vendida": 13.0,
-                "consumo_estimado": 0.2
+                "cantidad_vendida": 108.0,
+                "consumo_estimado": 1.62
             }
         ]
     },
     {
         "insumo": "Lechuga",
-        "total_consumido": 0.2,
+        "total_consumido": 1.62,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Sandwich de Pierna",
-                "cantidad_vendida": 13.0,
-                "consumo_estimado": 0.2
+                "cantidad_vendida": 108.0,
+                "consumo_estimado": 1.62
             }
         ]
     },
     {
-        "insumo": "Azúcar glass",
-        "total_consumido": 0.16,
+        "insumo": "Malvaviscos",
+        "total_consumido": 1.35,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Chocolate Caliente Especial",
+                "cantidad_vendida": 135.0,
+                "consumo_estimado": 1.35
+            }
+        ]
+    },
+    {
+        "insumo": "Queso crema",
+        "total_consumido": 1.2,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Pastel de Zanahoria",
-                "cantidad_vendida": 32.0,
-                "consumo_estimado": 0.16
+                "cantidad_vendida": 80.0,
+                "consumo_estimado": 1.2
             }
         ]
     },
     {
         "insumo": "Jarabe de vainilla",
-        "total_consumido": 0.08,
+        "total_consumido": 1.08,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Latte Vainilla",
-                "cantidad_vendida": 4.0,
-                "consumo_estimado": 0.08
+                "cantidad_vendida": 54.0,
+                "consumo_estimado": 1.08
+            }
+        ]
+    },
+    {
+        "insumo": "Cardamomo",
+        "total_consumido": 0.99,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Té Chai Latte",
+                "cantidad_vendida": 197.0,
+                "consumo_estimado": 0.99
+            }
+        ]
+    },
+    {
+        "insumo": "Mantequilla",
+        "total_consumido": 0.98,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Panini de Pavo y Queso",
+                "cantidad_vendida": 98.0,
+                "consumo_estimado": 0.98
+            }
+        ]
+    },
+    {
+        "insumo": "Aceite vegetal",
+        "total_consumido": 0.8,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Pastel de Zanahoria",
+                "cantidad_vendida": 80.0,
+                "consumo_estimado": 0.8
+            }
+        ]
+    },
+    {
+        "insumo": "Nuez",
+        "total_consumido": 0.8,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Pastel de Zanahoria",
+                "cantidad_vendida": 80.0,
+                "consumo_estimado": 0.8
+            }
+        ]
+    },
+    {
+        "insumo": "Azúcar glass",
+        "total_consumido": 0.4,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Pastel de Zanahoria",
+                "cantidad_vendida": 80.0,
+                "consumo_estimado": 0.4
             }
         ]
     },
     {
         "insumo": "Canela molida",
-        "total_consumido": 0.06,
+        "total_consumido": 0.2,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Té Chai Latte",
-                "cantidad_vendida": 61.0,
-                "consumo_estimado": 0.06
+                "cantidad_vendida": 197.0,
+                "consumo_estimado": 0.2
             }
         ]
     },
     {
         "insumo": "Jengibre",
-        "total_consumido": 0.06,
+        "total_consumido": 0.2,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Té Chai Latte",
-                "cantidad_vendida": 61.0,
-                "consumo_estimado": 0.06
+                "cantidad_vendida": 197.0,
+                "consumo_estimado": 0.2
             }
         ]
     },
     {
         "insumo": "Vainilla",
-        "total_consumido": 0.06,
+        "total_consumido": 0.16,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Pastel de Zanahoria",
-                "cantidad_vendida": 32.0,
-                "consumo_estimado": 0.06
-            }
-        ]
-    },
-    {
-        "insumo": "Polvo para hornear",
-        "total_consumido": 0.03,
-        "ranking_productos": [
-            {
-                "posicion": 1,
-                "producto": "Pastel de Zanahoria",
-                "cantidad_vendida": 32.0,
-                "consumo_estimado": 0.03
+                "cantidad_vendida": 80.0,
+                "consumo_estimado": 0.16
             }
         ]
     },
     {
         "insumo": "Canela en polvo",
-        "total_consumido": 0.01,
+        "total_consumido": 0.08,
         "ranking_productos": [
             {
                 "posicion": 1,
                 "producto": "Cappuccino Clásico",
-                "cantidad_vendida": 11.0,
-                "consumo_estimado": 0.01
+                "cantidad_vendida": 82.0,
+                "consumo_estimado": 0.08
+            }
+        ]
+    },
+    {
+        "insumo": "Polvo para hornear",
+        "total_consumido": 0.08,
+        "ranking_productos": [
+            {
+                "posicion": 1,
+                "producto": "Pastel de Zanahoria",
+                "cantidad_vendida": 80.0,
+                "consumo_estimado": 0.08
             }
         ]
     }

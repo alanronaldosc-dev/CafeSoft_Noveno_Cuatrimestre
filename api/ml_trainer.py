@@ -395,7 +395,62 @@ def predecir_insumos_semana(spark, db):
             json.dump([], f)
         return []
 
+    # ── Consumo REAL de la semana pasada (lunes-domingo anterior) ──────────
+    hoy             = datetime.utcnow()
+    inicio_sem_pas  = hoy - timedelta(days=hoy.weekday() + 7)   # lunes semana pasada
+    fin_sem_pas     = inicio_sem_pas + timedelta(days=7)         # lunes semana actual
+
+    ventas_sem_pas  = list(db["ventas"].find(
+        {"created_at": {"$gte": inicio_sem_pas, "$lt": fin_sem_pas}},
+        {"productos": 1}
+    ))
+
+    ventas_sem_por_producto = {}
+    for venta in ventas_sem_pas:
+        productos = venta.get("productos", {})
+        if isinstance(productos, dict):
+            items = productos.values()
+        elif isinstance(productos, list):
+            items = productos
+        else:
+            continue
+        for producto in items:
+            pid      = str(producto.get("producto_id", ""))
+            cantidad = producto.get("cantidad", 0)
+            try:
+                cantidad = float(cantidad)
+                if pid and cantidad > 0:
+                    ventas_sem_por_producto[pid] = ventas_sem_por_producto.get(pid, 0) + cantidad
+            except (TypeError, ValueError):
+                continue
+
+    # Acumular consumo real de insumos para la semana pasada
+    consumo_real_sem = {}   # { nombre_insumo: consumo_real }
+    for pid, total_vendido in ventas_sem_por_producto.items():
+        try:
+            producto = db["tb_productos"].find_one({"_id": ObjectId(pid)})
+        except Exception:
+            producto = db["tb_productos"].find_one({"_id": pid})
+        if not producto:
+            continue
+        insumos          = producto.get("insumos", [])
+        insumos_cantidad = producto.get("insumos_cantidad", {})
+        for insumo_id in insumos:
+            cantidad_por_unidad = float(insumos_cantidad.get(str(insumo_id), 0) or 0)
+            if cantidad_por_unidad <= 0:
+                continue
+            try:
+                insumo_doc = db["Insumos"].find_one({"_id": ObjectId(insumo_id)})
+            except Exception:
+                insumo_doc = db["Insumos"].find_one({"_id": insumo_id})
+            nombre_insumo = insumo_doc["nombre"] if insumo_doc else str(insumo_id)
+            consumo_real_sem[nombre_insumo] = round(
+                consumo_real_sem.get(nombre_insumo, 0.0) + cantidad_por_unidad * total_vendido, 3
+            )
+    # ──────────────────────────────────────────────────────────────────────
+
     filas_insumos = {}
+
 
     for pid, total_vendido in ventas_por_producto.items():
         try:
@@ -484,17 +539,25 @@ def predecir_insumos_semana(spark, db):
 
             for row in rows:
                 pred_semana    = max(0.0, float(row["prediction"]))
+                nombre_insumo  = row["nombre"]
+                # Consumo real de la semana pasada; si no hubo ventas ese insumo → None
+                necesidad_real = consumo_real_sem.get(nombre_insumo, None)
                 stock          = float(row["stock_actual"])
                 dias_restantes = round((stock / pred_semana * 7), 1) if pred_semana > 0 else None
+                error_absoluto = round(abs(pred_semana - necesidad_real), 3) if necesidad_real is not None else None
                 resultado.append({
-                    "nombre":           row["nombre"],
+                    "nombre":           nombre_insumo,
                     "tipo":             row["tipo"],
                     "consumo_mes":      round(float(row["consumo_mes"]), 3),
+                    "necesidad_real":   necesidad_real,
                     "necesidad_semana": round(pred_semana, 3),
+                    "error_absoluto":   error_absoluto,
                     "stock_actual":     round(stock, 3),
                     "dias_restantes":   dias_restantes,
                     "alerta":           stock < pred_semana
                 })
+
+
         else:
             resultado = _fallback_insumos(filas_insumos)
     else:

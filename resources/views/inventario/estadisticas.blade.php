@@ -76,11 +76,12 @@
                                 <th>Insumo</th>
                                 <th>Tipo</th>
                                 <th class="text-center">Consumo mes</th>
-                                <th class="text-center">Necesidad semana</th>
+                                <th class="text-center">Predicción / Error</th>
                                 <th class="text-center">Stock actual</th>
                                 <th class="text-center">Estado</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             @foreach($predicciones as $index => $p)
                             <tr class="{{ $index >= 3 ? 'fila-extra' : '' }}" @if($index >= 3) style="display:none;" @endif>
@@ -88,10 +89,27 @@
                                 <td><span class="tipo-badge tipo-{{ $p['tipo'] }}">{{ ucfirst($p['tipo']) }}</span></td>
                                 <td class="text-center">{{ number_format($p['consumo_mes'], 3) }}</td>
                                 <td class="text-center">
-                                    <span class="stock-badge {{ $p['alerta'] ? 'bajo' : 'normal' }}">
-                                        {{ number_format($p['necesidad_semana'], 3) }}
-                                    </span>
+                                    <div class="pred-error-cell">
+                                        <div class="pred-real">
+                                            <span class="pred-label">Real</span>
+                                            <span class="pred-value">{{ number_format($p['necesidad_real'] ?? $p['necesidad_semana'], 3) }}</span>
+                                        </div>
+                                        <div class="pred-pred">
+                                            <span class="pred-label">Pred</span>
+                                            <span class="stock-badge {{ $p['alerta'] ? 'bajo' : 'normal' }}">
+                                                {{ number_format($p['necesidad_semana'], 3) }}
+                                            </span>
+                                            @php
+                                                $err = $p['error_absoluto'] ?? null;
+                                                $errClass = is_null($err) ? 'error-na' : ($err < 0.5 ? 'error-ok' : ($err < 2 ? 'error-warn' : 'error-bad'));
+                                                $errLabel = is_null($err) ? 'Sin datos sem.' : 'Δ ' . number_format($err, 3);
+                                            @endphp
+                                            <span class="error-delta {{ $errClass }}">{{ $errLabel }}</span>
+
+                                        </div>
+                                    </div>
                                 </td>
+
                                 <td class="text-center">{{ number_format($p['stock_actual'], 3) }}</td>
                                 <td class="text-center">
                                     @if($p['alerta'])
@@ -522,6 +540,43 @@ document.getElementById('mapreduceCollapse')?.addEventListener('hide.bs.collapse
     border-radius: 20px;
     border: 1px solid #e8d5c0;
 }
+/* ===== Error absoluto: predicción vs real ===== */
+.pred-error-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+}
+.pred-real, .pred-pred {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.pred-label {
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    color: #8B6B4F;
+    min-width: 30px;
+}
+.pred-value {
+    font-size: .9rem;
+    color: #5D4037;
+    font-weight: 600;
+}
+.error-delta {
+    font-size: .78rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: .3px;
+}
+.error-ok   { background: #d4edda; color: #155724; }
+.error-warn { background: #fff3cd; color: #856404; }
+.error-bad  { background: #f8d7da; color: #721c24; }
+.error-na { background: #e9ecef; color: #6c757d; }
+
 </style>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

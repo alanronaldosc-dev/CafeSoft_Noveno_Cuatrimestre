@@ -1,1 +1,1 @@
-{"accuracy": 1.0, "total_registros": 67, "umbral": 100.0, "modelo_path": "/mnt/c/Users/HP/Documents/UTVT/OCTAVO CUATRI/Proyecto-Caf-Soft--main/Proyecto-Caf-Soft--main/api/modelo_ventas", "ultima_actualizacion": "2026-06-12 01:42:11"}
+{"accuracy": 0.9524, "total_registros": 108, "umbral": 225.0, "modelo_path": "/mnt/c/Users/HP/Documents/UTVT/OCTAVO CUATRI/Proyecto-Caf-Soft--main/Proyecto-Caf-Soft--main/api/modelo_ventas", "ultima_actualizacion": "2026-06-29 20:29:57"}
