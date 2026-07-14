@@ -1,0 +1,206 @@
+{
+    "algoritmo": "K-Means",
+    "k_optimo": 3,
+    "wcss_final": 7.1744,
+    "centroides_pca": [
+        {
+            "cluster": 1,
+            "pc1": -1.3174,
+            "pc2": 0.0358
+        },
+        {
+            "cluster": 2,
+            "pc1": 2.8083,
+            "pc2": -1.4892
+        },
+        {
+            "cluster": 3,
+            "pc1": 2.2881,
+            "pc2": 2.7639
+        }
+    ],
+    "resumen_clusters": [
+        {
+            "cluster": 1,
+            "cantidad_clientes": 6,
+            "promedios": {
+                "frecuencia": 6.17,
+                "gasto_total": 2341.83,
+                "ticket_promedio": 320.2,
+                "recencia_dias": 49.17,
+                "hora_preferida": 8.36,
+                "pct_fines_semana": 0.14,
+                "diversidad_productos": 4.5
+            },
+            "clientes": [
+                "Sofia",
+                "Cliente1",
+                "clase_profe_Hector",
+                "abi",
+                "Uriel Gutiérrez Serrano",
+                "Laura Test"
+            ]
+        },
+        {
+            "cluster": 2,
+            "cantidad_clientes": 2,
+            "promedios": {
+                "frecuencia": 1.0,
+                "gasto_total": 18180.0,
+                "ticket_promedio": 18180.0,
+                "recencia_dias": 15.0,
+                "hora_preferida": 22.0,
+                "pct_fines_semana": 1.0,
+                "diversidad_productos": 10.0
+            },
+            "clientes": [
+                "Cliente_prueba",
+                "administrador_a"
+            ]
+        },
+        {
+            "cluster": 3,
+            "cantidad_clientes": 1,
+            "promedios": {
+                "frecuencia": 47.0,
+                "gasto_total": 24956.0,
+                "ticket_promedio": 530.98,
+                "recencia_dias": 15.0,
+                "hora_preferida": 12.66,
+                "pct_fines_semana": 0.47,
+                "diversidad_productos": 13.0
+            },
+            "clientes": [
+                "Alan Ronaldo"
+            ]
+        }
+    ],
+    "clientes": [
+        {
+            "usuario_id": "698525c236a91620420f5a62",
+            "nombre": "Alan Ronaldo",
+            "frecuencia": 47,
+            "gasto_total": 24956.0,
+            "ticket_promedio": 530.98,
+            "recencia_dias": 15.0,
+            "hora_preferida": 12.66,
+            "pct_fines_semana": 0.4681,
+            "diversidad_productos": 13,
+            "pc1": 2.288081,
+            "pc2": 2.763861,
+            "cluster": 3
+        },
+        {
+            "usuario_id": "697790e10a7d5339f5ce4141",
+            "nombre": "Sofia",
+            "frecuencia": 4,
+            "gasto_total": 900.0,
+            "ticket_promedio": 225.0,
+            "recencia_dias": 97.0,
+            "hora_preferida": 1.0,
+            "pct_fines_semana": 0.5,
+            "diversidad_productos": 4,
+            "pc1": -1.829959,
+            "pc2": -0.411155,
+            "cluster": 1
+        },
+        {
+            "usuario_id": "69d5d19604ed0c8f76d50929",
+            "nombre": "Cliente1",
+            "frecuencia": 9,
+            "gasto_total": 1237.0,
+            "ticket_promedio": 137.44,
+            "recencia_dias": 38.0,
+            "hora_preferida": 8.22,
+            "pct_fines_semana": 0.2222,
+            "diversidad_productos": 7,
+            "pc1": -0.824951,
+            "pc2": 0.397814,
+            "cluster": 1
+        },
+        {
+            "usuario_id": "69d835a1166b462c685bdaf3",
+            "nombre": "clase_profe_Hector",
+            "frecuencia": 1,
+            "gasto_total": 64.0,
+            "ticket_promedio": 64.0,
+            "recencia_dias": 91.0,
+            "hora_preferida": 23.0,
+            "pct_fines_semana": 0.0,
+            "diversidad_productos": 1,
+            "pc1": -2.105893,
+            "pc2": -1.506979,
+            "cluster": 1
+        },
+        {
+            "usuario_id": "6978d76a33d28e16170290e2",
+            "nombre": "abi",
+            "frecuencia": 5,
+            "gasto_total": 1100.0,
+            "ticket_promedio": 220.0,
+            "recencia_dias": 41.0,
+            "hora_preferida": 11.8,
+            "pct_fines_semana": 0.0,
+            "diversidad_productos": 3,
+            "pc1": -1.554375,
+            "pc2": -0.15239,
+            "cluster": 1
+        },
+        {
+            "usuario_id": "6a41a23fb0a1b2af5b999038",
+            "nombre": "Cliente_prueba",
+            "frecuencia": 1,
+            "gasto_total": 12630.0,
+            "ticket_promedio": 12630.0,
+            "recencia_dias": 15.0,
+            "hora_preferida": 22.0,
+            "pct_fines_semana": 1.0,
+            "diversidad_productos": 10,
+            "pc1": 2.23766,
+            "pc2": -1.281403,
+            "cluster": 2
+        },
+        {
+            "usuario_id": "69bae22351bc8b29c1debe45",
+            "nombre": "administrador_a",
+            "frecuencia": 1,
+            "gasto_total": 23730.0,
+            "ticket_promedio": 23730.0,
+            "recencia_dias": 15.0,
+            "hora_preferida": 22.0,
+            "pct_fines_semana": 1.0,
+            "diversidad_productos": 10,
+            "pc1": 3.378939,
+            "pc2": -1.697042,
+            "cluster": 2
+        },
+        {
+            "usuario_id": "6a275c1ed61a395953bb24ac",
+            "nombre": "Uriel Gutiérrez Serrano",
+            "frecuencia": 8,
+            "gasto_total": 7990.0,
+            "ticket_promedio": 998.75,
+            "recencia_dias": 14.0,
+            "hora_preferida": 4.62,
+            "pct_fines_semana": 0.125,
+            "diversidad_productos": 7,
+            "pc1": -0.406344,
+            "pc2": 0.870154,
+            "cluster": 1
+        },
+        {
+            "usuario_id": "6a41c7e16a1029cf970d6e12",
+            "nombre": "Laura Test",
+            "frecuencia": 10,
+            "gasto_total": 2760.0,
+            "ticket_promedio": 276.0,
+            "recencia_dias": 14.0,
+            "hora_preferida": 1.5,
+            "pct_fines_semana": 0.0,
+            "diversidad_productos": 5,
+            "pc1": -1.183158,
+            "pc2": 1.01714,
+            "cluster": 1
+        }
+    ]
+}
