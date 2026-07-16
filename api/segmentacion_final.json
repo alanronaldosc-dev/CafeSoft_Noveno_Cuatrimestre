@@ -1,6 +1,6 @@
 {
     "algoritmo": "PCA + K-Means + Índice de Silueta + Reglas de Negocio",
-    "fecha_generacion": "2026-07-16 01:30:17",
+    "fecha_generacion": "2026-07-16 13:52:21",
     "total_clientes": 9,
     "estadisticas": {
         "🏆 Cliente VIP": 1,
@@ -20,12 +20,12 @@
             "frecuencia": 47,
             "gasto_total": 24956.0,
             "ticket_promedio": 530.98,
-            "recencia_dias": 16.0,
+            "recencia_dias": 14.0,
             "hora_preferida": 12.66,
             "pct_fines_semana": 0.4681,
             "diversidad_productos": 13,
-            "pc1": 2.285027,
-            "pc2": 2.762876
+            "pc1": 2.286322,
+            "pc2": 2.75979
         },
         {
             "usuario_id": "697790e10a7d5339f5ce4141",
@@ -37,12 +37,12 @@
             "frecuencia": 4,
             "gasto_total": 900.0,
             "ticket_promedio": 225.0,
-            "recencia_dias": 98.0,
+            "recencia_dias": 95.0,
             "hora_preferida": 1.0,
             "pct_fines_semana": 0.5,
             "diversidad_productos": 4,
-            "pc1": -1.829873,
-            "pc2": -0.416906
+            "pc1": -1.824618,
+            "pc2": -0.411351
         },
         {
             "usuario_id": "69d5d19604ed0c8f76d50929",
@@ -54,12 +54,12 @@
             "frecuencia": 9,
             "gasto_total": 1237.0,
             "ticket_promedio": 137.44,
-            "recencia_dias": 38.0,
+            "recencia_dias": 36.0,
             "hora_preferida": 8.22,
             "pct_fines_semana": 0.2222,
             "diversidad_productos": 7,
-            "pc1": -0.817334,
-            "pc2": 0.404213
+            "pc1": -0.818053,
+            "pc2": 0.404238
         },
         {
             "usuario_id": "69d835a1166b462c685bdaf3",
@@ -71,12 +71,12 @@
             "frecuencia": 1,
             "gasto_total": 64.0,
             "ticket_promedio": 64.0,
-            "recencia_dias": 92.0,
+            "recencia_dias": 90.0,
             "hora_preferida": 23.0,
             "pct_fines_semana": 0.0,
             "diversidad_productos": 1,
-            "pc1": -2.105631,
-            "pc2": -1.511822
+            "pc1": -2.112603,
+            "pc2": -1.517075
         },
         {
             "usuario_id": "6978d76a33d28e16170290e2",
@@ -88,12 +88,12 @@
             "frecuencia": 5,
             "gasto_total": 1100.0,
             "ticket_promedio": 220.0,
-            "recencia_dias": 41.0,
+            "recencia_dias": 39.0,
             "hora_preferida": 11.8,
             "pct_fines_semana": 0.0,
             "diversidad_productos": 3,
-            "pc1": -1.546885,
-            "pc2": -0.146338
+            "pc1": -1.548353,
+            "pc2": -0.146414
         },
         {
             "usuario_id": "6a41a23fb0a1b2af5b999038",
@@ -105,12 +105,12 @@
             "frecuencia": 1,
             "gasto_total": 12630.0,
             "ticket_promedio": 12630.0,
-            "recencia_dias": 16.0,
+            "recencia_dias": 14.0,
             "hora_preferida": 22.0,
             "pct_fines_semana": 1.0,
             "diversidad_productos": 10,
-            "pc1": 2.235967,
-            "pc2": -1.280684
+            "pc1": 2.235792,
+            "pc2": -1.281227
         },
         {
             "usuario_id": "69bae22351bc8b29c1debe45",
@@ -122,12 +122,12 @@
             "frecuencia": 1,
             "gasto_total": 23730.0,
             "ticket_promedio": 23730.0,
-            "recencia_dias": 16.0,
+            "recencia_dias": 14.0,
             "hora_preferida": 22.0,
             "pct_fines_semana": 1.0,
             "diversidad_productos": 10,
-            "pc1": 3.378058,
-            "pc2": -1.695677
+            "pc1": 3.377552,
+            "pc2": -1.697068
         },
         {
             "usuario_id": "6a275c1ed61a395953bb24ac",
@@ -139,12 +139,12 @@
             "frecuencia": 8,
             "gasto_total": 7990.0,
             "ticket_promedio": 998.75,
-            "recencia_dias": 15.0,
+            "recencia_dias": 13.0,
             "hora_preferida": 4.62,
             "pct_fines_semana": 0.125,
             "diversidad_productos": 7,
-            "pc1": -0.410944,
-            "pc2": 0.868899
+            "pc1": -0.409425,
+            "pc2": 0.870853
         },
         {
             "usuario_id": "6a41c7e16a1029cf970d6e12",
@@ -156,12 +156,12 @@
             "frecuencia": 10,
             "gasto_total": 2760.0,
             "ticket_promedio": 276.0,
-            "recencia_dias": 15.0,
+            "recencia_dias": 13.0,
             "hora_preferida": 1.5,
             "pct_fines_semana": 0.0,
             "diversidad_productos": 5,
-            "pc1": -1.188383,
-            "pc2": 1.015439
+            "pc1": -1.186614,
+            "pc2": 1.018255
         }
     ]
 }

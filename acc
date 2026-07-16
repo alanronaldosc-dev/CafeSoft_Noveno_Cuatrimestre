@@ -1,0 +1,83 @@
+[33mcommit 246b962174794df87bc9b1f6141e26722ef936b5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Alan Ronaldo <al222310501@gmail.com>
+Date:   Sun Jul 12 20:37:31 2026 -0600
+
+    PCA para segmenracion_clientes.py
+
+[33mcommit 3b4fcdbede7937c4c1c4bce1644cada1d23fb073[m
+Author: Alan <al222310501@gmai.com>
+Date:   Thu Jun 11 19:48:13 2026 -0600
+
+    Map-Reduce y Kmeans en Ml-Trainer
+
+[33mcommit b5dc1d831eb6f34fe6b5a10ef2d5f59ddf01e417[m
+Author: Alan <al222310501@gmai.com>
+Date:   Wed Jun 10 11:21:00 2026 -0600
+
+    Map-Reduce y Kmeans
+
+[33mcommit 03209e2cb7082404b0466c750c09eee60e7974ad[m
+Author: Alan <al222310501@gmai.com>
+Date:   Sun Jun 7 21:10:17 2026 -0600
+
+    ML Insumos1.0
+
+[33mcommit 030d28d871e3561d22eb2886a290f250391db4ec[m
+Author: Alan <al222310501@gmai.com>
+Date:   Sun Jun 7 18:11:47 2026 -0600
+
+    ML Insumos
+
+[33mcommit c68f09f52a8dd971c857d15aea19ddf2846205da[m
+Author: Alan <al222310501@gmai.com>
+Date:   Sat Jun 6 18:08:23 2026 -0600
+
+    Descuento de insumos
+
+[33mcommit 43a002288a7b2e6eb0c7894f9d70d96baa1bdaaa[m
+Author: Alan <al222310501@gmai.com>
+Date:   Sat Jun 6 17:55:56 2026 -0600
+
+    Integracion de crud de Insumos
+
+[33mcommit 68ed03925626d9401cc9110e69ff306a14aadb70[m
+Author: Alan <al222310501@gmai.com>
+Date:   Fri Jun 5 14:44:38 2026 -0600
+
+    integracion de insumos
+
+[33mcommit c8b9b630178cd20dc0939bff12d6dd62076778ad[m
+Author: Alan <al222310501@gmai.com>
+Date:   Wed May 27 22:43:13 2026 -0600
+
+    Primer pushh
+
+[33mcommit 462fe60899f797ec5cc6f98c00edba87e968824c[m
+Author: Alan <al222310501@gmai.com>
+Date:   Mon Apr 13 17:54:21 2026 -0600
+
+    Integracion de modelo con PySpark
+
+[33mcommit 2228f9e16ac6331ed560d5ddb81599614b2db977[m
+Author: Alan <al222310501@gmai.com>
+Date:   Thu Mar 26 13:23:11 2026 -0600
+
+    Conexion a atlas
+
+[33mcommit 3b8f0fdab59e2de1002bd9bcbab895f84891ebd2[m
+Author: Alan <al222310501@gmai.com>
+Date:   Fri Mar 6 16:26:02 2026 -0600
+
+    Funcion de puntos
+
+[33mcommit 769fbd15e368e55e0cd148fa24d82ef5d43c56a6[m
+Author: Alan <al222310501@gmai.com>
+Date:   Tue Mar 3 15:24:56 2026 -0600
+
+    Cambios de roles
+
+[33mcommit 8fc1650eaa20d3ff0a7202159a80ba1529c15702[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Alan <al222310501@gmai.com>
+Date:   Wed Feb 25 23:48:59 2026 -0600
+
+    Primer commit - Proyecto CafeSoft

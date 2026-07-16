@@ -387,6 +387,293 @@
             {{ $combos[0]['ventas_con_dos_o_mas_productos'] ?? 0 }} con 2+ productos
         </p>
     </div>
+    {{-- ===== SEGMENTACIÓN DE CLIENTES: PCA ===== --}}
+@if(!empty($segmentacionPca) && !empty($segmentacionPca['clientes']))
+
+<div class="ml-section mt-4">
+
+    {{-- Encabezado --}}
+    <h5 class="detalle-titulo">
+        <i class="fas fa-brain me-2" style="color:#8B4513;"></i>
+        Segmentación de Clientes — PCA
+        <small class="ms-2" style="font-size:0.75rem;color:#a0856b;font-weight:400;">
+            Análisis de Componentes Principales · {{ $segmentacionPca['total_clientes'] }} clientes
+        </small>
+    </h5>
+
+    {{-- Tarjetas de resumen PCA --}}
+    <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-lg-3">
+            <div class="grafico-card text-center py-3">
+                <div style="font-size:2rem;color:#8B4513;"><i class="fas fa-users"></i></div>
+                <div style="font-size:1.8rem;font-weight:700;color:#3E2723;">
+                    {{ $segmentacionPca['total_clientes'] }}
+                </div>
+                <div style="color:#8B6B4F;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px;">
+                    Clientes analizados
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="grafico-card text-center py-3">
+                <div style="font-size:2rem;color:#8B4513;"><i class="fas fa-compress-arrows-alt"></i></div>
+                <div style="font-size:1.8rem;font-weight:700;color:#3E2723;">
+                    {{ $segmentacionPca['n_componentes_pca'] }}
+                </div>
+                <div style="color:#8B6B4F;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px;">
+                    Componentes PCA
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="grafico-card text-center py-3">
+                <div style="font-size:2rem;color:#8B4513;"><i class="fas fa-percentage"></i></div>
+                <div style="font-size:1.8rem;font-weight:700;color:#3E2723;">
+                    {{ round($segmentacionPca['varianza_acumulada_pca'] * 100, 1) }}%
+                </div>
+                <div style="color:#8B6B4F;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px;">
+                    Varianza explicada
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="grafico-card text-center py-3">
+                <div style="font-size:2rem;color:#8B4513;"><i class="fas fa-layer-group"></i></div>
+                <div style="font-size:1.8rem;font-weight:700;color:#3E2723;">
+                    {{ count($segmentacionPca['features_usadas']) }}
+                </div>
+                <div style="color:#8B6B4F;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px;">
+                    Features usadas
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+
+        {{-- Gráfica de dispersión PCA --}}
+        <div class="col-lg-7">
+            <div class="grafico-card">
+                <h6 class="grafico-titulo mb-3">
+                    <i class="fas fa-project-diagram me-2" style="color:#8B4513;"></i>
+                    Mapa de clientes en espacio PCA
+                    <small style="font-weight:400;color:#a0856b;">
+                        · PC1 {{ round($segmentacionPca['varianza_por_componente'][0] * 100, 1) }}%
+                        · PC2 {{ round($segmentacionPca['varianza_por_componente'][1] * 100, 1) }}%
+                    </small>
+                </h6>
+                {{-- Etiquetas de ejes --}}
+                <div style="text-align:center;margin-bottom:4px;">
+                    <small style="color:#8B6B4F;">
+                        <strong>PC1</strong> =
+                        {{ $segmentacionPca['interpretacion_componentes'][0]['interpretacion'] ?? '—' }}
+                        &nbsp;|&nbsp;
+                        <strong>PC2</strong> =
+                        {{ $segmentacionPca['interpretacion_componentes'][1]['interpretacion'] ?? '—' }}
+                    </small>
+                </div>
+                <div style="position:relative;height:320px;">
+                    <canvas id="graficaPCA"></canvas>
+                </div>
+            </div>
+        </div>
+
+        {{-- Tabla de clientes con coordenadas --}}
+        <div class="col-lg-5">
+            <div class="grafico-card h-100">
+                <h6 class="grafico-titulo mb-3">
+                    <i class="fas fa-list-ol me-2" style="color:#8B4513;"></i>
+                    Perfil de clientes
+                </h6>
+                <div class="table-responsive">
+                    <table class="table detalle-table" style="font-size:.85rem;">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th class="text-center">Visitas</th>
+                                <th class="text-end">Gasto total</th>
+                                <th class="text-center">PC1</th>
+                                <th class="text-center">PC2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($segmentacionPca['clientes'] as $cliente)
+                            <tr>
+                                <td>
+                                    <span style="font-weight:600;color:#3E2723;">
+                                        {{ $cliente['nombre'] }}
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="mesa-badge">{{ $cliente['frecuencia'] }}</span>
+                                </td>
+                                <td class="text-end">
+                                    <span class="total-badge">
+                                        ${{ number_format($cliente['gasto_total'], 0) }}
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    @php $pc1 = $cliente['pc1']; @endphp
+                                    <span style="color:{{ $pc1 > 0 ? '#155724' : '#721c24' }};font-weight:600;">
+                                        {{ number_format($pc1, 2) }}
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    @php $pc2 = $cliente['pc2']; @endphp
+                                    <span style="color:{{ $pc2 > 0 ? '#155724' : '#721c24' }};font-weight:600;">
+                                        {{ number_format($pc2, 2) }}
+                                    </span>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{-- Varianza por componente — barras --}}
+    <div class="grafico-card mt-4">
+        <h6 class="grafico-titulo mb-3">
+            <i class="fas fa-chart-bar me-2" style="color:#8B4513;"></i>
+            Varianza explicada por componente
+        </h6>
+        <div style="height:140px;">
+            <canvas id="graficaVarianza"></canvas>
+        </div>
+    </div>
+
+    {{-- Interpretación de componentes --}}
+    <div class="row g-3 mt-1">
+        @foreach($segmentacionPca['interpretacion_componentes'] as $comp)
+        <div class="col-md-6">
+            <div class="grafico-card">
+                <h6 style="color:#5D4037;font-weight:700;margin-bottom:12px;">
+                    <span style="background:#8B4513;color:white;padding:2px 10px;border-radius:20px;font-size:.8rem;margin-right:8px;">
+                        {{ $comp['componente'] }}
+                    </span>
+                    {{ $comp['interpretacion'] }}
+                </h6>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                    @foreach($comp['features_top'] as $feat)
+                    @php
+                        $peso    = $feat['peso'];
+                        $pctBar  = min(abs($peso) * 100, 100);
+                        $color   = $peso >= 0 ? '#8B4513' : '#dc3545';
+                        $bgBar   = $peso >= 0 ? 'rgba(139,69,19,.15)' : 'rgba(220,53,69,.1)';
+                    @endphp
+                    <div>
+                        <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+                            <small style="color:#5D4037;font-weight:600;">{{ $feat['feature'] }}</small>
+                            <small style="color:{{ $color }};font-weight:700;">
+                                {{ $peso >= 0 ? '+' : '' }}{{ number_format($peso, 3) }}
+                            </small>
+                        </div>
+                        <div style="background:#f0e8dc;border-radius:20px;height:8px;overflow:hidden;">
+                            <div style="width:{{ $pctBar }}%;height:100%;background:{{ $color }};border-radius:20px;transition:width .6s ease;"></div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <p class="text-muted mt-2 mb-0" style="font-size:.78rem;">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Peso positivo: la feature empuja al cliente hacia valores altos en este componente.
+                    Peso negativo: la feature lo aleja.
+                </p>
+            </div>
+        </div>
+        @endforeach
+    </div>
+
+    <p class="text-muted mt-3" style="font-size:0.8rem;text-align:right;">
+        <i class="fas fa-info-circle me-1"></i>
+        Generado por PCA con sklearn · Features normalizadas con Z-score ·
+        Varianza acumulada: {{ round($segmentacionPca['varianza_acumulada_pca'] * 100, 1) }}%
+    </p>
+
+    {{-- ===== SEGMENTOS DE CLIENTES ===== --}}
+    @if(!empty($segmentosEtiquetados))
+    <hr style="border-color:#e8d5c0;margin:30px 0;">
+    <h6 class="grafico-titulo mb-4">
+        <i class="fas fa-users-cog me-2" style="color:#8B4513;"></i>
+        Segmentos Detectados
+        <small class="ms-2" style="font-size:.75rem;color:#a0856b;font-weight:400;">
+            Basado en K-Means · {{ array_sum(array_map(fn($s) => count($s['clientes']), $segmentosEtiquetados)) }} clientes clasificados
+        </small>
+    </h6>
+
+    <div class="row g-3">
+        {{-- Columna izquierda: tarjetas de segmentos --}}
+        <div class="col-lg-6">
+            <div style="display:flex;flex-direction:column;gap:12px;">
+                @foreach($segmentosEtiquetados as $tipo => $seg)
+                <div class="seg-card" style="border-color:{{ $seg['border'] }};background:{{ $seg['bg'] }};">
+                    <div class="seg-card-header">
+                        <span class="seg-card-icono">{{ $seg['icono'] }}</span>
+                        <div>
+                            <span class="seg-card-titulo" style="color:{{ $seg['color'] }};">
+                                {{ $seg['etiqueta'] }}
+                            </span>
+                            <span class="seg-card-count">
+                                {{ count($seg['clientes']) }} {{ count($seg['clientes']) === 1 ? 'cliente' : 'clientes' }}
+                            </span>
+                        </div>
+                    </div>
+                    {{-- Chips de clientes --}}
+                    <div class="seg-chips">
+                        @foreach($seg['clientes'] as $cli)
+                        <span class="seg-chip" style="border-color:{{ $seg['border'] }};color:{{ $seg['color'] }};">
+                            {{ $cli['nombre'] }}
+                            <small style="opacity:.7;margin-left:4px;">
+                                {{ $cli['frecuencia'] }}x · ${{ number_format($cli['gasto_total'], 0) }}
+                            </small>
+                        </span>
+                        @endforeach
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- Columna derecha: campañas de marketing --}}
+        <div class="col-lg-6">
+            <div class="grafico-card h-100">
+                <h6 class="grafico-titulo mb-3">
+                    <i class="fas fa-bullhorn me-2" style="color:#8B4513;"></i>
+                    Campañas de Marketing Sugeridas
+                </h6>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                    @foreach($segmentosEtiquetados as $tipo => $seg)
+                    <div class="seg-campaign" style="border-left-color:{{ $seg['border'] }};">
+                        <span style="font-size:1.1rem;">{{ $seg['icono'] }}</span>
+                        <div>
+                            <span style="font-weight:700;color:#3E2723;">{{ $seg['etiqueta'] }}</span>
+                            <span style="color:#5D4037;font-size:.88rem;display:block;">
+                                {{ $seg['accion'] }}
+                            </span>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+</div>
+
+@else
+<div class="mt-4 p-4 rounded-4 text-center" style="background:#fff8f0;border:1px dashed #d9b382;">
+    <i class="fas fa-brain fa-2x mb-2" style="color:#d9b382;"></i>
+    <p style="color:#8B6B4F;margin:0;">
+        No hay datos de segmentación PCA. Ejecuta
+        <code>python segmentacion_clientes.py</code> desde la carpeta <code>api/</code>.
+    </p>
+</div>
+@endif
+
 </div>
 @else
 <div class="mt-4 p-4 rounded-4 text-center" style="background:#fff8f0;border:1px dashed #d9b382;">
@@ -485,6 +772,126 @@
             }
         });
         @endif
+        // ── Gráfica PCA: dispersión PC1 vs PC2 ──────────────────────────────
+@if(!empty($segmentacionPca['clientes']))
+const pcaClientes = @json($segmentacionPca['clientes']);
+const coloresPca  = [
+    '#8B4513','#D2691E','#D4AF37','#A0522D','#5D4037',
+    '#C0874F','#E8A87C','#6D3B1F','#B8860B','#8B6914'
+];
+new Chart(document.getElementById('graficaPCA'), {
+    type: 'scatter',
+    data: {
+        datasets: [{
+            label: 'Clientes',
+            data: pcaClientes.map(c => ({ x: c.pc1, y: c.pc2, nombre: c.nombre, frecuencia: c.frecuencia, gasto: c.gasto_total })),
+            backgroundColor: pcaClientes.map((_, i) => coloresPca[i % coloresPca.length]),
+            pointRadius: 10,
+            pointHoverRadius: 14,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    label: ctx => [
+                        `${ctx.raw.nombre}`,
+                        `PC1: ${ctx.raw.x.toFixed(3)}  PC2: ${ctx.raw.y.toFixed(3)}`,
+                        `Frecuencia: ${ctx.raw.frecuencia}  Gasto: $${ctx.raw.gasto.toLocaleString()}`
+                    ]
+                }
+            }
+        },
+        scales: {
+            x: { title: { display: true, text: 'PC1 — {{ $segmentacionPca["interpretacion_componentes"][0]["interpretacion"] ?? "Componente 1" }}' } },
+            y: { title: { display: true, text: 'PC2 — {{ $segmentacionPca["interpretacion_componentes"][1]["interpretacion"] ?? "Componente 2" }}' } }
+        }
+    }
+});
+@endif
+
+// ── Gráfica WCSS: método del codo ───────────────────────────────────
+@if(!empty($segmentacionWcss['wcss_por_k']))
+const wcssData   = @json($segmentacionWcss['wcss_por_k']);
+const kOptimo    = {{ $segmentacionWcss['k_optimo'] ?? 'null' }};
+new Chart(document.getElementById('graficaWCSS'), {
+    type: 'line',
+    data: {
+        labels: wcssData.map(d => `K=${d.k}`),
+        datasets: [{
+            label: 'WCSS',
+            data: wcssData.map(d => d.wcss),
+            borderColor: '#8B4513',
+            backgroundColor: wcssData.map(d => d.k === kOptimo ? 'rgba(139,69,19,0.8)' : 'rgba(139,69,19,0.2)'),
+            borderWidth: 2,
+            pointRadius: wcssData.map(d => d.k === kOptimo ? 10 : 5),
+            pointHoverRadius: 12,
+            tension: 0.3,
+            fill: false,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: ctx => {
+                        const label = `WCSS: ${ctx.raw.toFixed(3)}`;
+                        return ctx.label === `K=${kOptimo}` ? label + '  ← K óptimo' : label;
+                    }
+                }
+            }
+        },
+        scales: {
+            x: { title: { display: true, text: 'Número de clusters (K)' } },
+            y: { title: { display: true, text: 'WCSS (inercia)' } }
+        }
+    }
+});
+@endif
+
+// ── Gráfica varianza explicada por componente ────────────────────────
+@if(!empty($segmentacionPca['varianza_por_componente']))
+new Chart(document.getElementById('graficaVarianza'), {
+    type: 'bar',
+    data: {
+        labels: @json(array_map(fn($i) => 'PC' . ($i + 1), array_keys($segmentacionPca['varianza_por_componente']))),
+        datasets: [{
+            label: 'Varianza explicada (%)',
+            data: @json(array_map(fn($v) => round($v * 100, 1), $segmentacionPca['varianza_por_componente'])),
+            backgroundColor: ['rgba(139,69,19,0.8)', 'rgba(210,105,30,0.7)', 'rgba(212,175,55,0.6)',
+                              'rgba(160,82,45,0.5)', 'rgba(93,64,55,0.4)'],
+            borderRadius: 8,
+            borderSkipped: false,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    label: ctx => `Varianza: ${ctx.raw}%`
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100,
+                ticks: { callback: v => v + '%' },
+                title: { display: true, text: 'Varianza (%)' }
+            }
+        }
+    }
+});
+@endif
+
     });
 
     // ML Predicción
@@ -536,9 +943,109 @@ document.getElementById('btn-predecir')?.addEventListener('click', function () {
         document.getElementById('ml-detalle').innerHTML = 'No se pudo conectar. Verifica que la API Python esté corriendo.';
     });
 });
+
+
 </script>
 
 <style>
+
+    /* ===== SEGMENTACIÓN DE CLIENTES ===== */
+.seg-metric-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 20px 10px;
+    background: linear-gradient(145deg, #fff, #f5f0eb);
+    border-radius: 18px;
+    border: 1px solid rgba(139,69,19,.1);
+    height: 100%;
+    transition: all .3s;
+}
+.seg-metric-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(139,69,19,.12); }
+.seg-metric-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 4px;
+}
+.seg-metric-val  { font-size: 2rem; font-weight: 700; color: #3E2723; line-height: 1; }
+.seg-metric-label { font-size: .8rem; color: #8B6B4F; text-transform: uppercase; letter-spacing: .4px; font-weight: 600; }
+.seg-metric-sub  { font-size: .75rem; color: #a0856b; text-align: center; }
+
+.seg-interp-badge {
+    background: #faf5f0; border: 1px solid #e8d5c0;
+    border-radius: 12px; padding: 8px 14px;
+    display: flex; flex-direction: column; gap: 2px;
+}
+.seg-interp-badge strong { color: #8B4513; font-size: .85rem; }
+.seg-interp-badge span   { color: #3E2723; font-size: .9rem; font-weight: 600; }
+.seg-interp-badge small  { color: #a0856b; font-size: .75rem; }
+
+.seg-cluster-card {
+    background: white; border-radius: 18px; padding: 20px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.06);
+    border: 1px solid #e8d5c0; height: 100%;
+    transition: all .3s;
+}
+.seg-cluster-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(139,69,19,.12); }
+.seg-cluster-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 14px;
+}
+.seg-cluster-icon  { font-size: 2.2rem; line-height: 1; }
+.seg-cluster-title { font-weight: 700; color: #3E2723; font-size: 1.05rem; }
+.seg-cluster-count { font-size: .82rem; color: #8B6B4F; }
+
+.seg-perfil-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;
+}
+.seg-perfil-item {
+    display: flex; align-items: center; gap: 7px;
+    background: #faf5f0; border-radius: 10px; padding: 6px 10px;
+    font-size: .82rem; color: #5D4037;
+}
+.seg-perfil-item i { color: #8B4513; width: 14px; text-align: center; }
+
+.seg-accion {
+    background: linear-gradient(145deg, #f5ebe0, #ede0d4);
+    border-radius: 10px; padding: 9px 14px;
+    font-size: .85rem; color: #5D4037; margin-bottom: 12px;
+}
+.seg-clientes-lista { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg-cliente-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: #f5ebe0; border: 1px solid #e8d5c0;
+    border-radius: 20px; padding: 4px 12px;
+    font-size: .8rem; color: #3E2723; font-weight: 600;
+}
+.seg-cliente-chip small { color: #8B6B4F; font-weight: 400; }
+
+/* ── Tarjetas de segmentos ── */
+.seg-card {
+    border: 1.5px solid #e8d5c0;
+    border-radius: 16px;
+    padding: 14px 18px;
+    transition: transform .2s, box-shadow .2s;
+}
+.seg-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+.seg-card-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.seg-card-icono  { font-size: 1.6rem; line-height: 1; }
+.seg-card-titulo { font-weight: 700; font-size: 1rem; display: block; }
+.seg-card-count  { font-size: .78rem; color: #8B6B4F; display: block; }
+.seg-chips       { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    border: 1px solid #e8d5c0; border-radius: 20px;
+    padding: 4px 12px; font-size: .8rem; font-weight: 600;
+    background: rgba(255,255,255,.7);
+}
+.seg-campaign {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: #faf5f0; border-radius: 12px; padding: 12px 16px;
+    border-left: 4px solid #e8d5c0;
+}
+
     /* ===== ESTILOS DECORATIVOS (mismos que en inventario y ventas) ===== */
     .reportes-container {
         position: relative;

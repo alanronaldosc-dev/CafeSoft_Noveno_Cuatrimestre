@@ -1,7 +1,7 @@
 {
     "algoritmo": "Indice de Silueta",
     "k_utilizado": 3,
-    "score_global": 0.5953,
+    "score_global": 0.5949,
     "interpretacion": {
         "nivel": "Buena",
         "descripcion": "La segmentación es aceptable."
@@ -9,34 +9,34 @@
     "centroides": [
         {
             "cluster": 1,
-            "pc1": -1.3165,
-            "pc2": 0.0356
+            "pc1": -1.3166,
+            "pc2": 0.0364
         },
         {
             "cluster": 2,
-            "pc1": 2.807,
-            "pc2": -1.4882
+            "pc1": 2.8067,
+            "pc2": -1.4891
         },
         {
             "cluster": 3,
-            "pc1": 2.285,
-            "pc2": 2.7629
+            "pc1": 2.2863,
+            "pc2": 2.7598
         }
     ],
     "score_por_cluster": [
         {
             "cluster": 1,
             "cantidad_clientes": 6,
-            "score_promedio": 0.6555,
-            "score_minimo": 0.5284,
-            "score_maximo": 0.7577
+            "score_promedio": 0.6549,
+            "score_minimo": 0.5272,
+            "score_maximo": 0.7575
         },
         {
             "cluster": 2,
             "cantidad_clientes": 2,
             "score_promedio": 0.7123,
-            "score_minimo": 0.6894,
-            "score_maximo": 0.7353
+            "score_minimo": 0.6895,
+            "score_maximo": 0.7352
         },
         {
             "cluster": 3,
@@ -50,7 +50,7 @@
         {
             "cluster": 1,
             "cantidad_clientes": 6,
-            "score_promedio_silueta": 0.6555,
+            "score_promedio_silueta": 0.6549,
             "segmentos": [
                 "Cliente Frecuente",
                 "Cliente Inactivo",
@@ -61,7 +61,7 @@
                 "frecuencia": 6.17,
                 "gasto_total": 2341.83,
                 "ticket_promedio": 320.2,
-                "recencia_dias": 49.83,
+                "recencia_dias": 47.67,
                 "hora_preferida": 8.36,
                 "pct_fines_semana": 0.14,
                 "diversidad_productos": 4.5
@@ -70,32 +70,32 @@
                 {
                     "nombre": "Sofia",
                     "segmento": "Cliente Inactivo",
-                    "score_silueta": 0.7349
+                    "score_silueta": 0.7352
                 },
                 {
                     "nombre": "Cliente1",
                     "segmento": "Cliente Frecuente",
-                    "score_silueta": 0.6993
+                    "score_silueta": 0.6991
                 },
                 {
                     "nombre": "clase_profe_Hector",
                     "segmento": "Cliente Inactivo",
-                    "score_silueta": 0.5719
+                    "score_silueta": 0.5705
                 },
                 {
                     "nombre": "abi",
                     "segmento": "Cliente Regular",
-                    "score_silueta": 0.7577
+                    "score_silueta": 0.7575
                 },
                 {
                     "nombre": "Uriel Gutiérrez Serrano",
                     "segmento": "Cliente Frecuente",
-                    "score_silueta": 0.5284
+                    "score_silueta": 0.5272
                 },
                 {
                     "nombre": "Laura Test",
                     "segmento": "Cliente Matutino",
-                    "score_silueta": 0.641
+                    "score_silueta": 0.6401
                 }
             ]
         },
@@ -110,7 +110,7 @@
                 "frecuencia": 1.0,
                 "gasto_total": 18180.0,
                 "ticket_promedio": 18180.0,
-                "recencia_dias": 16.0,
+                "recencia_dias": 14.0,
                 "hora_preferida": 22.0,
                 "pct_fines_semana": 1.0,
                 "diversidad_productos": 10.0
@@ -119,12 +119,12 @@
                 {
                     "nombre": "Cliente_prueba",
                     "segmento": "Cliente de Fin de Semana",
-                    "score_silueta": 0.6894
+                    "score_silueta": 0.6895
                 },
                 {
                     "nombre": "administrador_a",
                     "segmento": "Cliente de Fin de Semana",
-                    "score_silueta": 0.7353
+                    "score_silueta": 0.7352
                 }
             ]
         },
@@ -139,7 +139,7 @@
                 "frecuencia": 47.0,
                 "gasto_total": 24956.0,
                 "ticket_promedio": 530.98,
-                "recencia_dias": 16.0,
+                "recencia_dias": 14.0,
                 "hora_preferida": 12.66,
                 "pct_fines_semana": 0.47,
                 "diversidad_productos": 13.0
@@ -160,12 +160,12 @@
             "frecuencia": 47,
             "gasto_total": 24956.0,
             "ticket_promedio": 530.98,
-            "recencia_dias": 16.0,
+            "recencia_dias": 14.0,
             "hora_preferida": 12.66,
             "pct_fines_semana": 0.4681,
             "diversidad_productos": 13,
-            "pc1": 2.285027,
-            "pc2": 2.762876,
+            "pc1": 2.286322,
+            "pc2": 2.75979,
             "cluster": 3,
             "segmento": "Cliente VIP",
             "score_silueta": 0.0
@@ -176,15 +176,15 @@
             "frecuencia": 4,
             "gasto_total": 900.0,
             "ticket_promedio": 225.0,
-            "recencia_dias": 98.0,
+            "recencia_dias": 95.0,
             "hora_preferida": 1.0,
             "pct_fines_semana": 0.5,
             "diversidad_productos": 4,
-            "pc1": -1.829873,
-            "pc2": -0.416906,
+            "pc1": -1.824618,
+            "pc2": -0.411351,
             "cluster": 1,
             "segmento": "Cliente Inactivo",
-            "score_silueta": 0.7349
+            "score_silueta": 0.7352
         },
         {
             "usuario_id": "69d5d19604ed0c8f76d50929",
@@ -192,15 +192,15 @@
             "frecuencia": 9,
             "gasto_total": 1237.0,
             "ticket_promedio": 137.44,
-            "recencia_dias": 38.0,
+            "recencia_dias": 36.0,
             "hora_preferida": 8.22,
             "pct_fines_semana": 0.2222,
             "diversidad_productos": 7,
-            "pc1": -0.817334,
-            "pc2": 0.404213,
+            "pc1": -0.818053,
+            "pc2": 0.404238,
             "cluster": 1,
             "segmento": "Cliente Frecuente",
-            "score_silueta": 0.6993
+            "score_silueta": 0.6991
         },
         {
             "usuario_id": "69d835a1166b462c685bdaf3",
@@ -208,15 +208,15 @@
             "frecuencia": 1,
             "gasto_total": 64.0,
             "ticket_promedio": 64.0,
-            "recencia_dias": 92.0,
+            "recencia_dias": 90.0,
             "hora_preferida": 23.0,
             "pct_fines_semana": 0.0,
             "diversidad_productos": 1,
-            "pc1": -2.105631,
-            "pc2": -1.511822,
+            "pc1": -2.112603,
+            "pc2": -1.517075,
             "cluster": 1,
             "segmento": "Cliente Inactivo",
-            "score_silueta": 0.5719
+            "score_silueta": 0.5705
         },
         {
             "usuario_id": "6978d76a33d28e16170290e2",
@@ -224,15 +224,15 @@
             "frecuencia": 5,
             "gasto_total": 1100.0,
             "ticket_promedio": 220.0,
-            "recencia_dias": 41.0,
+            "recencia_dias": 39.0,
             "hora_preferida": 11.8,
             "pct_fines_semana": 0.0,
             "diversidad_productos": 3,
-            "pc1": -1.546885,
-            "pc2": -0.146338,
+            "pc1": -1.548353,
+            "pc2": -0.146414,
             "cluster": 1,
             "segmento": "Cliente Regular",
-            "score_silueta": 0.7577
+            "score_silueta": 0.7575
         },
         {
             "usuario_id": "6a41a23fb0a1b2af5b999038",
@@ -240,15 +240,15 @@
             "frecuencia": 1,
             "gasto_total": 12630.0,
             "ticket_promedio": 12630.0,
-            "recencia_dias": 16.0,
+            "recencia_dias": 14.0,
             "hora_preferida": 22.0,
             "pct_fines_semana": 1.0,
             "diversidad_productos": 10,
-            "pc1": 2.235967,
-            "pc2": -1.280684,
+            "pc1": 2.235792,
+            "pc2": -1.281227,
             "cluster": 2,
             "segmento": "Cliente de Fin de Semana",
-            "score_silueta": 0.6894
+            "score_silueta": 0.6895
         },
         {
             "usuario_id": "69bae22351bc8b29c1debe45",
@@ -256,15 +256,15 @@
             "frecuencia": 1,
             "gasto_total": 23730.0,
             "ticket_promedio": 23730.0,
-            "recencia_dias": 16.0,
+            "recencia_dias": 14.0,
             "hora_preferida": 22.0,
             "pct_fines_semana": 1.0,
             "diversidad_productos": 10,
-            "pc1": 3.378058,
-            "pc2": -1.695677,
+            "pc1": 3.377552,
+            "pc2": -1.697068,
             "cluster": 2,
             "segmento": "Cliente de Fin de Semana",
-            "score_silueta": 0.7353
+            "score_silueta": 0.7352
         },
         {
             "usuario_id": "6a275c1ed61a395953bb24ac",
@@ -272,15 +272,15 @@
             "frecuencia": 8,
             "gasto_total": 7990.0,
             "ticket_promedio": 998.75,
-            "recencia_dias": 15.0,
+            "recencia_dias": 13.0,
             "hora_preferida": 4.62,
             "pct_fines_semana": 0.125,
             "diversidad_productos": 7,
-            "pc1": -0.410944,
-            "pc2": 0.868899,
+            "pc1": -0.409425,
+            "pc2": 0.870853,
             "cluster": 1,
             "segmento": "Cliente Frecuente",
-            "score_silueta": 0.5284
+            "score_silueta": 0.5272
         },
         {
             "usuario_id": "6a41c7e16a1029cf970d6e12",
@@ -288,15 +288,15 @@
             "frecuencia": 10,
             "gasto_total": 2760.0,
             "ticket_promedio": 276.0,
-            "recencia_dias": 15.0,
+            "recencia_dias": 13.0,
             "hora_preferida": 1.5,
             "pct_fines_semana": 0.0,
             "diversidad_productos": 5,
-            "pc1": -1.188383,
-            "pc2": 1.015439,
+            "pc1": -1.186614,
+            "pc2": 1.018255,
             "cluster": 1,
             "segmento": "Cliente Matutino",
-            "score_silueta": 0.641
+            "score_silueta": 0.6401
         }
     ]
 }
