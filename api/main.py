@@ -665,3 +665,67 @@ def get_kmeans_productos():
             status_code=500,
             detail=f"Error ejecutando análisis de combos: {str(e)}"
         )
+    
+    # ===============================
+# ENDPOINTS SEGMENTACION CLIENTES
+# ===============================
+
+BASE = os.path.dirname(os.path.abspath(__file__))
+
+
+def leer_json(nombre):
+    ruta = os.path.join(BASE, nombre)
+
+    if not os.path.exists(ruta):
+        raise HTTPException(
+            status_code=404,
+            detail=f"Archivo {nombre} no encontrado"
+        )
+
+    with open(ruta, "r", encoding="utf-8") as archivo:
+        return json_lib.load(archivo)
+
+
+
+@app.get("/ml/pca")
+def obtener_pca():
+    return {
+        "success": True,
+        "data": leer_json("segmentacion_pca.json")
+    }
+
+
+
+@app.get("/ml/wcss")
+def obtener_wcss():
+    return {
+        "success": True,
+        "data": leer_json("segmentacion_wcss.json")
+    }
+
+
+
+@app.get("/ml/silueta")
+def obtener_silueta():
+    return {
+        "success": True,
+        "data": leer_json("segmentacion_silueta.json")
+    }
+
+
+
+@app.get("/ml/entrenamiento")
+def obtener_entrenamiento():
+    return {
+        "success": True,
+        "data": leer_json("entrenamiento_prueba.json")
+    }
+
+
+
+@app.get("/ml/segmentacion")
+def obtener_segmentacion():
+    return {
+        "success": True,
+        "data": leer_json("segmentacion_final.json")
+    }
