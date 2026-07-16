@@ -664,6 +664,235 @@
 
 </div>
 
+{{-- ===== WCSS — MÉTODO DEL CODO ===== --}}
+@if(!empty($segmentacionWcss['wcss_por_k']))
+<div class="ml-section mt-4">
+
+    <h5 class="detalle-titulo">
+        <i class="fas fa-chart-line me-2" style="color:#8B4513;"></i>
+        WCSS — Método del Codo
+        <small class="ms-2" style="font-size:.75rem;color:#a0856b;font-weight:400;">
+            Within-Cluster Sum of Squares · K óptimo detectado: <strong>{{ $segmentacionWcss['k_optimo'] }}</strong>
+        </small>
+    </h5>
+
+    <div class="row g-4">
+
+        {{-- Gráfica del codo --}}
+        <div class="col-lg-7">
+            <div class="grafico-card">
+                <h6 class="grafico-titulo mb-1">
+                    <i class="fas fa-bezier-curve me-2" style="color:#8B4513;"></i>
+                    Curva WCSS por número de clusters
+                </h6>
+                <p style="font-size:.82rem;color:#8B6B4F;margin-bottom:14px;">
+                    El "codo" es el punto donde agregar más clusters ya no reduce significativamente la dispersión interna.
+                    El sistema detectó ese punto en <strong>K={{ $segmentacionWcss['k_optimo'] }}</strong>.
+                </p>
+                <div style="height:260px;">
+                    <canvas id="graficaWCSS"></canvas>
+                </div>
+            </div>
+        </div>
+
+        {{-- Interpretación textual --}}
+        <div class="col-lg-5">
+            <div class="grafico-card h-100">
+                <h6 class="grafico-titulo mb-3">
+                    <i class="fas fa-lightbulb me-2" style="color:#8B4513;"></i>
+                    ¿Qué significa WCSS?
+                </h6>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                    <div class="interp-item">
+                        <span class="interp-dot" style="background:#8B4513;"></span>
+                        <div>
+                            <strong>WCSS alto</strong>
+                            <span>Los clientes dentro de un grupo son muy distintos entre sí. El grupo no es homogéneo.</span>
+                        </div>
+                    </div>
+                    <div class="interp-item">
+                        <span class="interp-dot" style="background:#D4AF37;"></span>
+                        <div>
+                            <strong>WCSS bajo</strong>
+                            <span>Los clientes dentro de un grupo se parecen mucho. El grupo es compacto y coherente.</span>
+                        </div>
+                    </div>
+                    <div class="interp-item">
+                        <span class="interp-dot" style="background:#28a745;"></span>
+                        <div>
+                            <strong>K={{ $segmentacionWcss['k_optimo'] }} elegido</strong>
+                            <span>Con {{ $segmentacionWcss['k_optimo'] }} grupos el WCSS baja significativamente. Añadir más grupos no justifica la complejidad extra.</span>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Tabla compacta de valores --}}
+                <div class="mt-3" style="border:1px solid #e8d5c0;border-radius:12px;overflow:hidden;">
+                    <table style="width:100%;font-size:.82rem;border-collapse:collapse;">
+                        <thead>
+                            <tr style="background:#f8f4f0;">
+                                <th style="padding:8px 12px;color:#5D4037;text-align:center;">K</th>
+                                <th style="padding:8px 12px;color:#5D4037;text-align:center;">WCSS</th>
+                                <th style="padding:8px 12px;color:#5D4037;text-align:center;">Reducción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php $prevWcss = null; @endphp
+                            @foreach($segmentacionWcss['wcss_por_k'] as $fila)
+                            @php
+                                $reduccion = $prevWcss ? round((($prevWcss - $fila['wcss']) / $prevWcss) * 100, 1) : null;
+                                $esOptimo  = $fila['k'] === $segmentacionWcss['k_optimo'];
+                                $prevWcss  = $fila['wcss'];
+                            @endphp
+                            <tr style="{{ $esOptimo ? 'background:#fffbec;font-weight:700;' : '' }}border-bottom:1px solid #f0e8dc;">
+                                <td style="padding:7px 12px;text-align:center;">
+                                    {{ $fila['k'] }}
+                                    @if($esOptimo)<span style="color:#D4AF37;margin-left:4px;">← óptimo</span>@endif
+                                </td>
+                                <td style="padding:7px 12px;text-align:center;color:#3E2723;">{{ $fila['wcss'] }}</td>
+                                <td style="padding:7px 12px;text-align:center;">
+                                    @if($reduccion !== null)
+                                        <span style="color:{{ $reduccion > 30 ? '#155724' : ($reduccion > 10 ? '#856404' : '#721c24') }};">
+                                            -{{ $reduccion }}%
+                                        </span>
+                                    @else
+                                        <span style="color:#aaa;">—</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
+{{-- ===== ÍNDICE DE SILUETA ===== --}}
+@if(!empty($segmentacionWcss['silueta_por_k']))
+@php
+    $scoreSil  = $segmentacionWcss['score_silueta_optimo'] ?? null;
+    $calidad   = $segmentacionWcss['calidad_segmentacion'] ?? null;
+    $kOptSil   = $segmentacionWcss['k_optimo'] ?? null;
+
+    $colorCal = match($calidad) {
+        'Excelente' => '#155724', 'Buena' => '#1b6b3a',
+        'Razonable' => '#856404', default => '#721c24'
+    };
+    $bgCal = match($calidad) {
+        'Excelente', 'Buena' => '#d4edda',
+        'Razonable'          => '#fff3cd',
+        default              => '#f8d7da'
+    };
+    // Porcentaje para la barra visual (silueta va de -1 a 1, normalizamos a 0-100%)
+    $pctBarra = $scoreSil !== null ? round(($scoreSil + 1) / 2 * 100, 1) : 0;
+@endphp
+<div class="ml-section mt-4">
+
+    <h5 class="detalle-titulo">
+        <i class="fas fa-circle-half-stroke me-2" style="color:#8B4513;"></i>
+        Índice de Silueta
+        <small class="ms-2" style="font-size:.75rem;color:#a0856b;font-weight:400;">
+            Validación de la calidad de los clusters
+        </small>
+    </h5>
+
+    <div class="row g-4">
+
+        {{-- Score visual --}}
+        <div class="col-lg-4">
+            <div class="grafico-card text-center h-100" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+                {{-- Score grande --}}
+                <div style="font-size:3.5rem;font-weight:800;color:#3E2723;line-height:1;">
+                    {{ $scoreSil ?? '—' }}
+                </div>
+                <div style="font-size:.85rem;color:#8B6B4F;text-transform:uppercase;letter-spacing:.5px;">
+                    Score de silueta global
+                </div>
+                {{-- Barra de calidad --}}
+                <div style="width:100%;background:#f0e8dc;border-radius:20px;height:14px;overflow:hidden;">
+                    <div style="width:{{ $pctBarra }}%;height:100%;background:linear-gradient(90deg,#dc3545,#ffc107,#28a745);border-radius:20px;transition:width .8s ease;"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;width:100%;font-size:.72rem;color:#aaa;">
+                    <span>-1 (Pésimo)</span><span>0</span><span>+1 (Óptimo)</span>
+                </div>
+                {{-- Badge de calidad --}}
+                @if($calidad)
+                <span style="background:{{ $bgCal }};color:{{ $colorCal }};padding:6px 18px;border-radius:20px;font-weight:700;font-size:.9rem;">
+                    {{ $calidad }}
+                </span>
+                @endif
+                <p style="font-size:.8rem;color:#8B6B4F;margin:0;">
+                    Calculado con K={{ $kOptSil }} clusters
+                </p>
+            </div>
+        </div>
+
+        {{-- Gráfica silueta por K --}}
+        <div class="col-lg-4">
+            <div class="grafico-card h-100">
+                <h6 class="grafico-titulo mb-2">
+                    <i class="fas fa-chart-bar me-2" style="color:#8B4513;"></i>
+                    Score de silueta por K
+                </h6>
+                <p style="font-size:.8rem;color:#8B6B4F;margin-bottom:12px;">
+                    El K con el score más alto produce los grupos más bien definidos.
+                </p>
+                <div style="height:200px;">
+                    <canvas id="graficaSilueta"></canvas>
+                </div>
+            </div>
+        </div>
+
+        {{-- Interpretación textual --}}
+        <div class="col-lg-4">
+            <div class="grafico-card h-100">
+                <h6 class="grafico-titulo mb-3">
+                    <i class="fas fa-question-circle me-2" style="color:#8B4513;"></i>
+                    ¿Qué mide el índice de silueta?
+                </h6>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                    <div class="interp-item">
+                        <span class="interp-dot" style="background:#28a745;"></span>
+                        <div>
+                            <strong>Cerca de +1</strong>
+                            <span>El cliente está bien asignado. Su grupo es muy diferente a los otros.</span>
+                        </div>
+                    </div>
+                    <div class="interp-item">
+                        <span class="interp-dot" style="background:#ffc107;"></span>
+                        <div>
+                            <strong>Cerca de 0</strong>
+                            <span>El cliente está en la frontera entre dos grupos. Podría pertenecer a cualquiera.</span>
+                        </div>
+                    </div>
+                    <div class="interp-item">
+                        <span class="interp-dot" style="background:#dc3545;"></span>
+                        <div>
+                            <strong>Cerca de -1</strong>
+                            <span>El cliente probablemente está en el grupo equivocado.</span>
+                        </div>
+                    </div>
+                    <div class="interp-item" style="background:#fffbec;border-radius:10px;padding:8px 10px;">
+                        <span style="font-size:1rem;">🎯</span>
+                        <div>
+                            <strong>Con tus datos</strong>
+                            <span>Un score de <strong>{{ $scoreSil ?? '—' }}</strong> indica segmentación
+                                <strong style="color:{{ $colorCal }};">{{ strtolower($calidad ?? '—') }}</strong>.
+                                Los segmentos son accionables para campañas de marketing diferenciadas.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@endif
+
 @else
 <div class="mt-4 p-4 rounded-4 text-center" style="background:#fff8f0;border:1px dashed #d9b382;">
     <i class="fas fa-brain fa-2x mb-2" style="color:#d9b382;"></i>
@@ -849,6 +1078,61 @@ new Chart(document.getElementById('graficaWCSS'), {
         scales: {
             x: { title: { display: true, text: 'Número de clusters (K)' } },
             y: { title: { display: true, text: 'WCSS (inercia)' } }
+        }
+    }
+});
+@endif
+
+// ── Gráfica silueta por K ────────────────────────────────────────────
+@if(!empty($segmentacionWcss['silueta_por_k']))
+const silData  = @json($segmentacionWcss['silueta_por_k']);
+const kOptimoSil = {{ $segmentacionWcss['k_optimo'] ?? 'null' }};
+new Chart(document.getElementById('graficaSilueta'), {
+    type: 'bar',
+    data: {
+        labels: silData.map(d => `K=${d.k}`),
+        datasets: [{
+            label: 'Score de Silueta',
+            data: silData.map(d => d.score),
+            backgroundColor: silData.map(d =>
+                d.k === kOptimoSil
+                    ? 'rgba(139,69,19,0.85)'
+                    : 'rgba(139,69,19,0.25)'
+            ),
+            borderColor: silData.map(d =>
+                d.k === kOptimoSil ? '#8B4513' : 'rgba(139,69,19,0.4)'
+            ),
+            borderWidth: 2,
+            borderRadius: 8,
+            borderSkipped: false,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    label: ctx => {
+                        const label = `Silueta: ${ctx.raw.toFixed(4)}`;
+                        return ctx.label === `K=${kOptimoSil}`
+                            ? label + '  ← mejor K'
+                            : label;
+                    }
+                }
+            }
+        },
+        scales: {
+            x: { title: { display: true, text: 'Número de clusters (K)' } },
+            y: {
+                min: 0,
+                max: 1,
+                title: { display: true, text: 'Score (-1 a +1)' },
+                ticks: {
+                    callback: v => v.toFixed(1)
+                }
+            }
         }
     }
 });
@@ -1044,6 +1328,22 @@ document.getElementById('btn-predecir')?.addEventListener('click', function () {
     display: flex; align-items: flex-start; gap: 12px;
     background: #faf5f0; border-radius: 12px; padding: 12px 16px;
     border-left: 4px solid #e8d5c0;
+}
+
+/* ── WCSS e Índice de Silueta — interpretación ── */
+.interp-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: #faf5f0; border-radius: 10px; padding: 10px 12px;
+}
+.interp-item strong {
+    display: block; color: #3E2723; font-size: .85rem; margin-bottom: 2px;
+}
+.interp-item span {
+    color: #5D4037; font-size: .82rem; line-height: 1.4;
+}
+.interp-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0; margin-top: 4px;
 }
 
     /* ===== ESTILOS DECORATIVOS (mismos que en inventario y ventas) ===== */

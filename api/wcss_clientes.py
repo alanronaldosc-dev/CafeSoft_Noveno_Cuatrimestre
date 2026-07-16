@@ -239,12 +239,54 @@ def guardar_resultados(
     clientes_segmentados,
     resumen_clusters,
     modelo,
-    k_optimo
+    k_optimo,
+    valores_k=None,
+    valores_wcss=None,
+    resultados_silueta=None
 ):
+    # Tabla WCSS por K para la gráfica del codo en el frontend
+    wcss_por_k = []
+    if valores_k and valores_wcss:
+        for k, wcss in zip(valores_k, valores_wcss):
+            wcss_por_k.append({
+                "k":    k,
+                "wcss": round(float(wcss), 4)
+            })
+
+    # Score de silueta por K para el frontend
+    silueta_por_k = []
+    mejor_silueta = None
+    if valores_k and resultados_silueta:
+        for k, score in zip(valores_k, resultados_silueta):
+            silueta_por_k.append({
+                "k":     k,
+                "score": round(float(score), 4)
+            })
+        mejor_silueta = round(float(max(resultados_silueta)), 4)
+
+    # Calidad de segmentación según el índice de silueta
+    if mejor_silueta is not None:
+        if mejor_silueta >= 0.70:
+            calidad = "Excelente"
+        elif mejor_silueta >= 0.50:
+            calidad = "Buena"
+        elif mejor_silueta >= 0.25:
+            calidad = "Razonable"
+        else:
+            calidad = "Débil"
+    else:
+        calidad = None
+
     resultado = {
-        "algoritmo": "K-Means",
-        "k_optimo": k_optimo,
-        "wcss_final": round(float(modelo.inertia_), 4),
+        "algoritmo":    "K-Means",
+        "k_optimo":     k_optimo,
+        "wcss_final":   round(float(modelo.inertia_), 4),
+        # ── WCSS por K (para gráfica del codo) ──
+        "wcss_por_k":   wcss_por_k,
+        # ── Silueta por K y métricas globales ──
+        "silueta_por_k":          silueta_por_k,
+        "score_silueta_optimo":   mejor_silueta,
+        "calidad_segmentacion":   calidad,
         "centroides_pca": [
             {
                 "cluster": indice + 1,
@@ -256,7 +298,7 @@ def guardar_resultados(
             )
         ],
         "resumen_clusters": resumen_clusters,
-        "clientes": clientes_segmentados
+        "clientes":         clientes_segmentados
     }
 
     with open(
@@ -317,7 +359,10 @@ def main():
         clientes_segmentados,
         resumen_clusters,
         modelo_final,
-        k_optimo
+        k_optimo,
+        valores_k=valores_k,
+        valores_wcss=valores_wcss,
+        resultados_silueta=resultados_silueta
     )
 
     print("\nSegmentación final:")
